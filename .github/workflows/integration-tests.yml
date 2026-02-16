@@ -21,35 +21,6 @@ jobs:
         working-directory: backend
         run: npm install
 
-      - name: Start backend server
-        working-directory: backend
-        run: |
-          nohup npm start > server.log 2>&1 &
-          echo $! > server.pid
-          sleep 5
-
-      - name: Create test report folder
-        working-directory: backend
-        run: mkdir -p test-reports
-
       - name: Run integration tests
         working-directory: backend
-        env:
-          JEST_JUNIT_OUTPUT_DIR: test-reports
-          JEST_JUNIT_OUTPUT_NAME: junit.xml
         run: npm test
-
-      - name: Upload integration test reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: integration-test-reports
-          path: backend/test-reports
-
-      - name: Stop backend server
-        if: always()
-        working-directory: backend
-        run: |
-          if [ -f server.pid ]; then
-            kill $(cat server.pid) || true
-          fi
