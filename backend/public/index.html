@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finance Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="glow"></div>
+    <header class="hero">
+      <p class="eyebrow">Finance CI Integration</p>
+      <h1>Cashflow, clarified.</h1>
+      <p class="subtitle">
+        A minimal, fast dashboard for income, expenses, and balance — live from
+        your local API.
+      </p>
+    </header>
+
+    <main class="grid">
+      <section class="card summary">
+        <h2>Summary</h2>
+        <div class="summary-row">
+          <div>
+            <span class="label">Total Income</span>
+            <span id="totalIncome" class="value">-</span>
+          </div>
+          <div>
+            <span class="label">Total Expenses</span>
+            <span id="totalExpenses" class="value">-</span>
+          </div>
+          <div>
+            <span class="label">Balance</span>
+            <span id="balance" class="value">-</span>
+          </div>
+        </div>
+        <button id="refresh" class="btn">Refresh</button>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Expenses</h2>
+          <span class="muted">Last 10</span>
+        </div>
+        <ul id="expensesList" class="list"></ul>
+        <form id="expenseForm" class="form">
+          <input name="title" placeholder="Expense title" required />
+          <input name="amount" placeholder="Amount" type="number" step="0.01" required />
+          <button class="btn" type="submit">Add Expense</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Income</h2>
+          <span class="muted">Last 10</span>
+        </div>
+        <ul id="incomeList" class="list"></ul>
+        <form id="incomeForm" class="form">
+          <input name="source" placeholder="Income source" required />
+          <input name="amount" placeholder="Amount" type="number" step="0.01" required />
+          <button class="btn" type="submit">Add Income</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="foot">Local only · Port 5000</footer>
+    <script src="/app.js"></script>
+  </body>
+</html>
