@@ -1,0 +1,54 @@
+name: CI - Integration Tests (Personal Finance Tracker)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  integration-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install backend dependencies
+        working-directory: 20260216/finance-ci-integration/backend
+        run: npm install
+
+      - name: Start backend server
+        working-directory: 20260216/finance-ci-integration/backend
+        run: |
+          nohup npm start > server.log 2>&1 &
+          echo $! > server.pid
+
+      - name: Create test report folder
+        working-directory: 20260216/finance-ci-integration/backend
+        run: mkdir -p test-reports
+
+      - name: Run integration tests
+        working-directory: 20260216/finance-ci-integration/backend
+        env:
+          JEST_JUNIT_OUTPUT_DIR: test-reports
+          JEST_JUNIT_OUTPUT_NAME: junit.xml
+        run: npm test
+
+      - name: Upload integration test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-reports
+          path: 20260216/finance-ci-integration/backend/test-reports
+
+      - name: Stop backend server
+        if: always()
+        working-directory: 20260216/finance-ci-integration/backend
+        run: |
+          if [ -f server.pid ]; then
+            kill $(cat server.pid) || true
+          fi
