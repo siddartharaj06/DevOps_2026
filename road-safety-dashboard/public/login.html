@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoadSafe AI · Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="login-page">
+  <div class="login-shell">
+    <div class="login-panel">
+      <div class="login-brand">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h1>RoadSafe<em>AI</em></h1>
+      </div>
+      <p class="login-subtitle">Sign in to access accident intelligence analytics.</p>
+
+      <form id="loginForm" class="login-form" autocomplete="off">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" required placeholder="Enter username" />
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required placeholder="Enter password" />
+
+        <button id="loginBtn" type="submit">Login</button>
+        <p id="loginError" class="login-error" role="alert"></p>
+      </form>
+
+      <div class="login-hint">
+        Default credentials are set via environment variables.
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/login.js"></script>
+</body>
+</html>
